@@ -1,12 +1,10 @@
-import { Wrapper } from '../global-state/store'
-import '../../styles/globals.css'
+import "../../styles/globals.css"
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return(
-    <Wrapper>
-        <Component {...pageProps} />
-    </Wrapper>
+        <Component {...pageProps}  />
   )
 }
 
-export default MyApp
+
+
