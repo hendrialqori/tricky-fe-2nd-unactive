@@ -16,7 +16,7 @@ export const ProtectedPage = ({ children }) => {
             withCredentials : true
         })
         .then(r => {
-            setToken(r.data.refreshToken)
+            setToken(r?.data?.refreshToken)
             setLoding(false)
         })
         .catch(e => {
@@ -30,8 +30,8 @@ export const ProtectedPage = ({ children }) => {
         refreshToken();
     },[])
 
-    const decode = Token !== "" && error === null && jwtDecode(Token)
+    const decode = Token !== "" && jwtDecode(Token)
 
     if(loading) return <Loading />
-    return decode.userRole !== "Superuser" || error !== null ? <NotFound /> : children
+    return decode?.userRole !== "Superuser" ? <NotFound /> : children
 }
