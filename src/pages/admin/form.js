@@ -201,9 +201,9 @@ export default function Login() {
                 />
                 <ReactMarkdown 
                     components={Component}  
-                    className="prose max-w-none prose-headings:text-white prose-blockquote:bg-gray-800
-                            prose-p:text-white prose-pre:bg-main prose-strong:text-gray-200
-                            w-full text-[18px] my-10 text-black dark:text-white"        
+                    className="prose max-w-none prose-headings:text-black
+                            prose-p:text-black prose-pre:bg-main prose-strong:text-black
+                            w-full text-[18px] my-10 text-black"        
                 >
                     {content}
                 </ReactMarkdown>

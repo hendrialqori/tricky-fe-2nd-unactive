@@ -36,9 +36,9 @@ export default function Detail () {
                 </div>
                 <ReactMarkdown 
                     components={Component}  
-                    className="text-left prose max-w-none prose-headings:text-white prose-blockquote:bg-gray-800
-                            prose-p:text-white prose-pre:bg-main prose-strong:text-gray-200
-                            w-full text-[17px] my-5 text-black dark:text-white dark:font-light"        
+                    className="text-left prose max-w-none prose-blockquote:text-white dark:prose-blockquote:text-black
+                            prose-pre:bg-main prose-strong:text-black dark:prose-strong:text-white
+                            w-full text-[16px] my-5 text-black dark:text-white dark:font-light"        
                 >
                     {data.content}
                 </ReactMarkdown>
