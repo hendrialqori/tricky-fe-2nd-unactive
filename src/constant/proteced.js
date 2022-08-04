@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import axios from "axios"
 import jwtDecode from "jwt-decode"
 import NotFound from "../pages/404"
@@ -6,8 +6,8 @@ import { Loading } from "../component/loading"
 
 export const ProtectedPage = ({ children }) => {
 
-    const [Token, setToken] = useState("")
-    const [err, setError] = useState(null)
+    const [Token, setToken] = useState(null)
+    const [user, setUser] = useState("")
     const [loading, setLoding] = useState(false)
 
     const refreshToken = () => {
@@ -20,18 +20,35 @@ export const ProtectedPage = ({ children }) => {
             setLoding(false)
         })
         .catch(e => {
-            const error = e?.response.data.message
-            setError(error)
             setLoding(false)
         })
     }
 
+    const decode = useCallback(() => {
+       return new Promise((resolve, rejected) => {
+            if(!Token) {  
+                rejected("Guest")
+            }else{
+                const decode = jwtDecode(Token)
+                resolve(decode?.userRole)
+            }
+        })
+    },[Token])
+
     useEffect(()=> {
         refreshToken();
-    },[])
 
-    const decode = Token !== "" && jwtDecode(Token)
+        (()=>{
+            decode()
+            .then(r => {
+                setUser(r)
+            })
+            .catch(e => e)
+        })();
+        
+    },[decode])
+
 
     if(loading) return <Loading />
-    return decode?.userRole !== "Superuser" ? <NotFound /> : children
+    return user === "Superuser" ? children : <NotFound />
 }
