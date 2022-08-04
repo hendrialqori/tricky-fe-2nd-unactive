@@ -7,6 +7,7 @@ import { Loading } from "../component/loading"
 export const ProtectedPage = ({ children }) => {
 
     const [Token, setToken] = useState("")
+    const [err, setError] = useState(null)
     const [loading, setLoding] = useState(false)
 
     const refreshToken = () => {
@@ -19,6 +20,8 @@ export const ProtectedPage = ({ children }) => {
             setLoding(false)
         })
         .catch(e => {
+            const error = e?.response.data.message
+            setError(error)
             setLoding(false)
         })
     }
@@ -27,8 +30,8 @@ export const ProtectedPage = ({ children }) => {
         refreshToken();
     },[])
 
-    const decode = Token !== "" && jwtDecode(Token)
+    const decode = Token !== "" && error === null && jwtDecode(Token)
 
     if(loading) return <Loading />
-    return decode.userRole !== "Superuser" ? <NotFound /> : children
+    return decode.userRole !== "Superuser" && error === null ? <NotFound /> : children
 }
