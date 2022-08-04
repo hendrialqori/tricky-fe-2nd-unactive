@@ -22,23 +22,23 @@ export default function Detail () {
             <article className="text-center">
                 <div className="w-full md:w-max mx-auto mb-5">
                     <Image className='rounded-md object-cover' src={process.env.NEXT_PUBLIC_API+"/"+data.avatar} alt="thumbnail" height="270" width="500"  />
-                    <p className="text-xs text-left opacity-60 text-black dark:text-white">Image source : {data.avatarSource}</p>
+                    <p className="text-xs font-light text-left opacity-60 text-black dark:text-white">sumber : {data.avatarSource}</p>
                 </div>   
-                <h1 className="text-xl md:text-3xl my-2 text-black dark:text-white">{data.title}</h1>
+                <h1 className="text-xl md:text-3xl my-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 dark:from-purple-400 to-pink-600 dark:to-pink-400">{data.title}</h1>
                 <div className="flex gap-2 w-max mx-auto text-xs font-light mb-5 text-black dark:text-gray-300">
-                    <p className="font-bold text-sky-500">{data.category}</p> |
+                    <p className="font-bold text-purple-400">{data.category}</p> |
                     <p>{data.create}</p> |
                     <p>{data.timeRead}</p>
                 </div>
-                <div className="flex items-center gap-2 text-black dark:text-gray-300">
-                    <Image src="/love.png" alt="icon" height={18} width={18} />
-                    {data.loved}
+                <div className="flex text-xs items-center gap-2 text-black dark:text-gray-300">
+                    <Image src="/love.png" alt="icon" height={13} width={13} />
+                    <p className="-translate-x-1">{data.loved}</p>
                 </div>
                 <ReactMarkdown 
                     components={Component}  
                     className="text-left prose max-w-none prose-headings:text-white prose-blockquote:bg-gray-800
                             prose-p:text-white prose-pre:bg-main prose-strong:text-gray-200
-                            w-full text-[17px]  md:text-[18px] my-5 text-black dark:text-white dark:font-light"        
+                            w-full text-[17px] my-5 text-black dark:text-white dark:font-light"        
                 >
                     {data.content}
                 </ReactMarkdown>

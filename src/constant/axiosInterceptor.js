@@ -4,9 +4,6 @@ export const Instance = axios.create()
 axios.defaults.withCredentials=true
 Instance.interceptors.request.use(async(config) => {
     const token = await (await axios.get(`${process.env.NEXT_PUBLIC_API}/api/v1/refresh`)).data
-
-    console.log("Axios interceptoris running ...", token?.refreshToken)
-
     config.headers["Authorization"] = `Bearer ${token?.refreshToken}`
     return config
     
