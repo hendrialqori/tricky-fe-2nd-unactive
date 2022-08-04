@@ -33,5 +33,5 @@ export const ProtectedPage = ({ children }) => {
     const decode = Token !== "" && error === null && jwtDecode(Token)
 
     if(loading) return <Loading />
-    return decode.userRole !== "Superuser" && error === null ? <NotFound /> : children
+    return decode.userRole !== "Superuser" || error !== null ? <NotFound /> : children
 }
